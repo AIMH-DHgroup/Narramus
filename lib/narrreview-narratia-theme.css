@@ -292,6 +292,59 @@ body.narrreview-narratia-editor :is(#controls, #inputDiv, #sidebar, #narratives-
     background-color: var(--nr-surface-sunken) !important;
 }
 
+/* Drag previews keep the association card's neutral Narratia surface while detached from #inputDiv. */
+body.narrreview-narratia-editor .data.nr-entity-drag-preview.ui-draggable-dragging,
+body.narrreview-narratia-editor .data.nr-entity-drag-preview.ui-draggable-dragging:hover,
+body.narrreview-narratia-editor > .data.nr-entity-record.nr-entity-drag-preview.ui-draggable-dragging,
+body.narrreview-narratia-editor > .data.nr-entity-record.nr-entity-drag-preview.ui-draggable-dragging:hover {
+    background-color: var(--nr-surface-raised) !important;
+    border-color: var(--nr-line-strong) !important;
+    color: var(--nr-ink) !important;
+    opacity: .94 !important;
+    box-shadow: 0 4px 14px rgba(20, 32, 46, .14);
+    transition: none !important;
+}
+
+/* One measured target; its feedback never intercepts the drag pointer or shifts cards. */
+body.narrreview-narratia-editor #inputDiv {
+    position: relative;
+}
+
+body.narrreview-narratia-editor #inputDiv.nr-event-entity-drop-active {
+    outline: 2px dashed var(--nr-line-strong);
+    outline-offset: -3px;
+    background-color: var(--nr-surface-raised) !important;
+}
+
+body.narrreview-narratia-editor #inputDiv.nr-event-entity-drop-over {
+    outline: 2px solid var(--nr-accent);
+    outline-offset: -3px;
+    background-color: var(--nr-surface-sunken) !important;
+}
+
+body.narrreview-narratia-editor #inputDiv .nr-event-entity-drop-hint:not([hidden]) {
+    position: absolute;
+    right: 6px;
+    bottom: 5px;
+    z-index: 1;
+    display: inline-flex;
+    align-items: center;
+    min-height: 24px;
+    padding: 3px 8px;
+    border: 1px solid var(--nr-line-strong);
+    border-radius: 999px;
+    background: var(--nr-surface-raised);
+    color: var(--nr-ink);
+    font: 600 12px/16px var(--nr-font-ui);
+    pointer-events: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    body.narrreview-narratia-editor .data.nr-entity-drag-preview.ui-draggable-dragging {
+        transition: none !important;
+    }
+}
+
 body.narrreview-narratia-editor #controls .inner-shadow {
     box-shadow: inset 0 0 0 2px var(--nr-focus);
 }
@@ -539,6 +592,145 @@ body.narrreview-narratia-theme #login-branding > p {
     text-align: center;
 }
 
+/* Unauthenticated home state: keep the existing form and session flow, but
+ * return the branding, form, help text and legal copy to normal document flow.
+ * This state class is applied only after PHP/session.php confirms no user. */
+body.narrreview-narratia-home.nr-login-state {
+    min-height: 100vh;
+    overflow-x: hidden;
+    overflow-y: auto;
+}
+
+body.narrreview-narratia-home.nr-login-state .home-header,
+body.narrreview-narratia-home.nr-login-state #introDiv,
+body.narrreview-narratia-home.nr-login-state #emptyDiv {
+    display: none !important;
+}
+
+body.narrreview-narratia-home.nr-login-state #auth-div {
+    position: relative !important;
+    top: auto !important;
+    left: auto !important;
+    right: auto !important;
+    display: flex !important;
+    flex-direction: column;
+    align-items: stretch;
+    width: min(420px, calc(100% - 32px));
+    max-width: 420px;
+    min-height: 0;
+    margin: clamp(32px, 8vh, 80px) auto 24px;
+    padding: 28px 28px 24px;
+    overflow: visible;
+    border: 1px solid var(--nr-line);
+    border-radius: 16px;
+    background: var(--nr-surface-raised);
+    box-shadow: 0 12px 32px rgba(0, 0, 0, .08);
+}
+
+body.narrreview-narratia-home.nr-login-state #login-branding {
+    position: static;
+    left: auto;
+    bottom: auto;
+    transform: none;
+    width: 100%;
+    margin: 0 0 24px;
+    gap: 6px;
+}
+
+body.narrreview-narratia-home.nr-login-state #login-branding > img {
+    width: min(280px, 100%);
+}
+
+body.narrreview-narratia-home.nr-login-state #login-branding > span {
+    font: 600 28px/34px var(--nr-font-editorial);
+}
+
+body.narrreview-narratia-home.nr-login-state #login-branding > p {
+    width: 100%;
+    margin: 0;
+    font: 400 16px/22px var(--nr-font-ui);
+}
+
+body.narrreview-narratia-home.nr-login-state #auth-form {
+    width: 100%;
+    height: auto;
+    margin: 0;
+}
+
+body.narrreview-narratia-home.nr-login-state #auth-form > * {
+    margin-right: 0;
+    margin-left: 0;
+}
+
+body.narrreview-narratia-home.nr-login-state #auth-form .form-signin-heading {
+    margin: 0 0 20px;
+    color: var(--nr-ink);
+    font: 600 24px/30px var(--nr-font-ui);
+    text-align: left;
+}
+
+body.narrreview-narratia-home.nr-login-state #auth-form input,
+body.narrreview-narratia-home.nr-login-state #auth-form button {
+    width: 100%;
+    min-height: 48px;
+    height: auto !important;
+    margin-top: 12px;
+}
+
+body.narrreview-narratia-home.nr-login-state #auth-form input:first-of-type {
+    margin-top: 0;
+}
+
+body.narrreview-narratia-home.nr-login-state #auth-form button {
+    margin-top: 16px;
+}
+
+body.narrreview-narratia-home.nr-login-state #auth-form .help-inline {
+    min-height: 20px;
+    margin-top: 10px;
+    color: var(--nr-status-closed);
+    font: 400 14px/20px var(--nr-font-ui);
+    text-align: left;
+}
+
+body.narrreview-narratia-home.nr-login-state #user-pass {
+    width: 100%;
+    margin: 24px 0 0;
+    padding: 16px 0 0;
+    border-top: 1px solid var(--nr-line);
+    color: var(--nr-ink-muted);
+    font: 400 13px/20px var(--nr-font-ui);
+    text-align: center;
+}
+
+body.narrreview-narratia-home.nr-login-state > p.home-legal {
+    width: min(560px, calc(100% - 32px));
+    margin: 0 auto 32px;
+    padding: 0;
+    color: var(--nr-ink-muted);
+    font: 400 13px/20px var(--nr-font-ui);
+    text-align: center;
+}
+
+@media (max-width: 480px) {
+    body.narrreview-narratia-home.nr-login-state #auth-div {
+        width: calc(100% - 24px);
+        margin-top: 24px;
+        padding: 24px 20px 20px;
+        border-radius: 12px;
+    }
+
+    body.narrreview-narratia-home.nr-login-state #login-branding > span {
+        font-size: 24px;
+        line-height: 30px;
+    }
+
+    body.narrreview-narratia-home.nr-login-state #login-branding > p {
+        font-size: 15px;
+        line-height: 21px;
+    }
+}
+
 /* Reduce only branding clearance and text spacing where vertical room is tight. */
 @media (max-height: 800px) {
     body.narrreview-narratia-theme #login-branding {
@@ -777,6 +969,280 @@ body.narrreview-narratia-editor :is(.popover .js-close-popover, #digobjTable .di
     background-color: var(--nr-surface-sunken);
 }
 
+/* Preserve the legacy popover affordance while giving action links native buttons. */
+body.narrreview-narratia-editor .popover :is(.js-class-type-request, .js-delete-entity, .js-image-request, .js-open-file-input) {
+    padding: 0;
+    border: 0;
+    background: transparent;
+    color: inherit;
+    font: inherit;
+    text-align: inherit;
+    cursor: pointer;
+}
+
+body.narrreview-narratia-editor .popover :is(.js-class-type-request, .js-delete-entity, .js-image-request) {
+    text-decoration: underline;
+}
+
+body.narrreview-narratia-editor .popover .js-close-popover {
+    appearance: none;
+    padding: 0;
+    border: 0;
+    background: transparent;
+    font: inherit;
+    cursor: pointer;
+}
+
+body.narrreview-narratia-editor .popover .square.js-replace-image {
+    padding: 0;
+    appearance: none;
+    border-radius: 0;
+    background-color: transparent;
+}
+
+body.narrreview-narratia-editor .popover .square.js-replace-image:focus-visible,
+body.narrreview-narratia-editor .popover .js-open-file-input:focus-visible {
+    outline: 2px solid var(--nr-focus);
+    outline-offset: 2px;
+}
+
+body.narrreview-narratia-editor .popover .square > .js-open-file-input {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: max-content;
+    max-width: 100%;
+    transform: translate(-50%, -50%);
+}
+
+/* Entity details only: a compact, scrollable Narratia inspector surface. */
+body.narrreview-narratia-editor .popover.data-entity-details {
+    z-index: 1040 !important;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    width: var(--nr-entity-popover-width, min(400px, max(320px, 32vw))) !important;
+    max-width: calc(100vw - 24px);
+    max-height: var(--nr-entity-popover-max-height, calc(100vh - 24px));
+    overflow: hidden;
+    border: 1px solid var(--nr-line) !important;
+    border-radius: 16px;
+    background: var(--nr-surface-raised);
+    color: var(--nr-ink);
+    box-shadow: 0 14px 36px rgba(0, 0, 0, .18) !important;
+    font-family: var(--nr-font-ui);
+}
+
+/* Browser-record placement uses viewport-fixed CSS variables from the measured trigger. */
+body.narrreview-narratia-editor .popover.data-entity-details.entity-browser-details.withoutArrow {
+    position: fixed !important;
+    top: var(--nr-entity-popover-top, 120px) !important;
+    left: var(--nr-entity-popover-left, 12px) !important;
+    transform: none !important;
+    max-height: var(--nr-entity-popover-max-height, calc(100vh - 32px));
+}
+
+body.narrreview-narratia-editor .popover.data-entity-details > .popover-title {
+    flex: 0 0 auto;
+    padding: 14px 16px 12px;
+    border: 0;
+    border-bottom: 1px solid var(--nr-line);
+    background: var(--nr-surface-raised);
+    text-align: left;
+}
+
+body.narrreview-narratia-editor .popover.data-entity-details .entity-details-header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 12px;
+    min-width: 0;
+}
+
+body.narrreview-narratia-editor .popover.data-entity-details .entity-details-heading {
+    display: flex;
+    flex: 1 1 auto;
+    flex-direction: column;
+    gap: 3px;
+    min-width: 0;
+}
+
+body.narrreview-narratia-editor .popover.data-entity-details .entity-details-title {
+    min-width: 0;
+    overflow-wrap: anywhere;
+    color: var(--nr-ink);
+    font: 600 17px/22px var(--nr-font-ui);
+}
+
+body.narrreview-narratia-editor .popover.data-entity-details .entity-details-meta {
+    color: var(--nr-ink-muted);
+    font: 400 12px/17px var(--nr-font-ui);
+    overflow-wrap: anywhere;
+}
+
+body.narrreview-narratia-editor .popover.data-entity-details > .popover-title .js-close-popover {
+    display: inline-flex;
+    flex: 0 0 34px;
+    align-items: center;
+    justify-content: center;
+    float: none;
+    width: 34px;
+    min-width: 34px;
+    height: 34px;
+    margin: -4px -4px 0 0;
+    border-radius: 8px;
+    border: 1px solid var(--nr-line);
+    color: var(--nr-ink-muted);
+    line-height: 1;
+}
+
+body.narrreview-narratia-editor .popover.data-entity-details > .popover-title .js-close-popover:hover {
+    background: var(--nr-surface-sunken);
+    border-color: var(--nr-line-strong);
+    color: var(--nr-ink);
+}
+
+body.narrreview-narratia-editor .popover.data-entity-details > .popover-title .entity-details-close > .fa-xmark {
+    display: block;
+    font-size: 15px;
+    line-height: 1;
+}
+
+body.narrreview-narratia-editor .popover.data-entity-details > .popover-content {
+    flex: 1 1 auto;
+    min-height: 0;
+    padding: 4px 16px 12px;
+    overflow-x: hidden;
+    overflow-y: auto;
+    overscroll-behavior: contain;
+    background: var(--nr-surface-raised);
+}
+
+body.narrreview-narratia-editor .popover.data-entity-details .entity-details-section {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    min-width: 0;
+    padding: 12px 0;
+    border-bottom: 1px solid var(--nr-line);
+}
+
+body.narrreview-narratia-editor .popover.data-entity-details .entity-details-section:last-child {
+    border-bottom: 0;
+}
+
+body.narrreview-narratia-editor .popover.data-entity-details .entity-details-section-title,
+body.narrreview-narratia-editor .popover.data-entity-details .entity-details-field-label {
+    display: block;
+    margin: 0;
+    color: var(--nr-ink-muted);
+    font: 600 12px/17px var(--nr-font-ui);
+}
+
+body.narrreview-narratia-editor .popover.data-entity-details .entity-details-body .popoverContent {
+    display: block;
+    box-sizing: border-box;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    vertical-align: initial;
+}
+
+body.narrreview-narratia-editor .popover.data-entity-details .entity-details-body .popoverDiv {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    min-width: 0;
+    width: 100%;
+}
+
+body.narrreview-narratia-editor .popover.data-entity-details .entity-details-body .popoverCell {
+    display: block;
+    min-width: 0;
+    padding: 0;
+}
+
+body.narrreview-narratia-editor .popover.data-entity-details .popoverDesc {
+    box-sizing: border-box;
+    min-height: 64px;
+    max-height: 180px;
+    margin: 0;
+    padding: 9px 10px;
+    overflow: auto;
+    border: 1px solid var(--nr-line-strong);
+    border-radius: 8px;
+    background: var(--nr-surface-sunken);
+    color: var(--nr-ink);
+    font: 400 14px/20px var(--nr-font-ui);
+    font-style: normal;
+    overflow-wrap: anywhere;
+    cursor: text;
+}
+
+body.narrreview-narratia-editor .popover.data-entity-details .popoverDesc:focus-visible {
+    border-color: var(--nr-focus);
+    outline: 2px solid var(--nr-focus);
+    outline-offset: 2px;
+}
+
+body.narrreview-narratia-editor .popover.data-entity-details .entity-details-save-note {
+    margin: 0;
+    color: var(--nr-ink-muted);
+    font: 400 12px/17px var(--nr-font-ui);
+}
+
+body.narrreview-narratia-editor .popover.data-entity-details .entity-details-role .popoverLabel {
+    display: none;
+}
+
+body.narrreview-narratia-editor .popover.data-entity-details .entity-details-map [data-map-radio-qid] > .showEntity-title:first-child {
+    display: none;
+}
+
+body.narrreview-narratia-editor .popover.data-entity-details .entity-details-image-content {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    min-width: 0;
+}
+
+body.narrreview-narratia-editor .popover.data-entity-details .entity-primary-image,
+body.narrreview-narratia-editor .popover.data-entity-details .entity-secondary-image {
+    box-sizing: border-box;
+    display: block;
+    max-width: 100%;
+    max-height: 220px;
+    width: auto;
+    height: auto;
+    margin: 0 auto;
+    object-fit: contain;
+}
+
+body.narrreview-narratia-editor .popover.data-entity-details .imageContentDiv {
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+body.narrreview-narratia-editor .popover.data-entity-details .image-lookup-status {
+    flex: 0 0 100%;
+    margin: 0;
+    color: var(--nr-ink-muted);
+    font: 400 13px/18px var(--nr-font-ui);
+}
+
+body.narrreview-narratia-editor .popover.data-entity-details .entity-details-destructive {
+    border-bottom: 0;
+}
+
+body.narrreview-narratia-editor .popover.data-entity-details .entity-details-destructive .js-delete-entity {
+    color: var(--nr-status-closed);
+}
+
+body.narrreview-narratia-editor .popover.data-entity-details .entity-details-destructive .js-delete-entity:hover {
+    color: var(--nr-status-closed);
+    text-decoration-thickness: 2px;
+}
+
 body.narrreview-narratia-theme .modal-content > .modal-header > .close,
 body.narrreview-narratia-editor .modal-content > .modal-header > .close {
     opacity: 1;
@@ -822,7 +1288,7 @@ body.narrreview-narratia-editor .deleteButton > .x > .fa-solid {
     vertical-align: middle;
 }
 
-body.narrreview-narratia-editor :is(.deleteButton[role="button"], .js-close-popover[role="button"]):focus-visible {
+body.narrreview-narratia-editor :is(.deleteButton[role="button"], .js-close-popover[role="button"], .popover .js-close-popover):focus-visible {
     outline: 2px solid var(--nr-focus);
     outline-offset: 2px;
 }
@@ -1228,19 +1694,217 @@ body.narrreview-narratia-editor #controls #data-container > .data.nr-entity-reco
 /*
  * Local horizontal classes: only the entity-browsing column has a filter bar.
  * The editor and event sidebar remain top-aligned, outside that column.
- * Divide the width left after explicit gutters in the ratio 32 : 48 : 20.
+ * Divide the width left after explicit gutters in the ratio 25 : 50 : 25.
+ * Explicit border-box bases include panel padding in those shares, so the
+ * entity column keeps the same width when the sidebar releases its space.
  * Keep #container/mode-panel display JS-owned for preview transitions.
  */
 body.narrreview-narratia-editor #container.entity-column-layout {
-    height: calc(100vh - 182px);
+    /* Keep a measured 16px separation below the fixed header while retaining
+     * the original lower breathing room in the viewport calculation. */
+    height: calc(100vh - 138px);
+    margin-top: 126px;
     padding: 0 12px;
     gap: 12px;
     align-items: flex-start;
 }
 
+/* Control Panel dropdown: preserve Bootstrap ownership, replace only the
+ * legacy surface, dimensions and list treatment. */
+body.narrreview-narratia-editor #account-list #dropdown-menu-header {
+    position: absolute !important;
+    top: calc(100% + 8px) !important;
+    right: 0 !important;
+    left: auto !important;
+    width: min(380px, calc(100vw - 24px)) !important;
+    min-width: min(340px, calc(100vw - 24px)) !important;
+    max-width: calc(100vw - 24px) !important;
+    max-height: calc(100vh - 24px) !important;
+    margin: 0 !important;
+    padding: 12px !important;
+    overflow: hidden !important;
+    border: 1px solid var(--nr-line) !important;
+    border-radius: 14px !important;
+    background: var(--nr-surface-raised) !important;
+    box-shadow: 0 12px 32px rgba(0, 0, 0, .12), 0 2px 6px rgba(0, 0, 0, .04) !important;
+    color: var(--nr-ink);
+    z-index: 1050 !important;
+}
+
+body.narrreview-narratia-editor #account-list #welcome {
+    margin: 0;
+    padding: 4px 8px 12px;
+    border-bottom: 1px solid var(--nr-line);
+    color: var(--nr-ink-muted);
+    font: 600 12px/18px var(--nr-font-ui);
+    letter-spacing: .03em;
+    text-align: left;
+}
+
+body.narrreview-narratia-editor #account-list #home {
+    display: flex !important;
+    align-items: center;
+    justify-content: flex-start;
+    width: 100%;
+    min-height: 44px;
+    margin: 8px 0 12px !important;
+    padding: 10px 12px;
+    border: 1px solid transparent !important;
+    border-radius: 8px;
+    background: transparent !important;
+    color: var(--nr-ink) !important;
+    font: 600 14px/20px var(--nr-font-ui);
+    text-align: left;
+    box-shadow: none;
+}
+
+body.narrreview-narratia-editor #account-list #home:is(:hover, :focus-visible, :active) {
+    border-color: var(--nr-line) !important;
+    background: var(--nr-surface-sunken) !important;
+    color: var(--nr-ink) !important;
+}
+
+body.narrreview-narratia-editor #account-list #narratives-menu {
+    max-height: min(360px, max(120px, calc(100vh - 220px))) !important;
+    margin: 0;
+    padding: 0 4px !important;
+    overflow-x: hidden !important;
+    overflow-y: auto !important;
+    scrollbar-width: thin;
+    scrollbar-color: var(--nr-line-strong) transparent;
+}
+
+body.narrreview-narratia-editor #account-list #narratives-menu::-webkit-scrollbar {
+    width: 6px;
+}
+
+body.narrreview-narratia-editor #account-list #narratives-menu::-webkit-scrollbar-thumb {
+    border-radius: 3px;
+    background: var(--nr-line-strong);
+}
+
+body.narrreview-narratia-editor #account-list #narratives-menu::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+body.narrreview-narratia-editor #account-list :is(#my-narratives-list, #my-account-list) {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    text-align: left;
+}
+
+body.narrreview-narratia-editor #account-list #my-narratives-list .dropdown-header,
+body.narrreview-narratia-editor #account-list #account-menu .dropdown-header {
+    display: block;
+    width: 100%;
+    margin: 0 0 6px !important;
+    padding: 10px 8px 6px !important;
+    border-bottom: 1px solid var(--nr-line);
+    background: transparent !important;
+    color: var(--nr-ink-muted) !important;
+    font: 700 11px/16px var(--nr-font-ui) !important;
+    letter-spacing: .08em;
+    text-align: left;
+    text-transform: uppercase;
+}
+
+body.narrreview-narratia-editor #account-list .narra-list-item {
+    display: block;
+    width: 100%;
+    height: auto;
+    margin: 2px 0;
+    padding: 0;
+    list-style: none;
+}
+
+body.narrreview-narratia-editor #account-list .narra-list-item a.data {
+    display: -webkit-box !important;
+    width: 100% !important;
+    min-height: 44px;
+    margin: 0 !important;
+    padding: 10px 42px 10px 12px !important;
+    overflow: hidden;
+    border: 1px solid transparent !important;
+    border-radius: 8px;
+    background: transparent !important;
+    color: var(--nr-ink) !important;
+    font: 500 14px/20px var(--nr-font-ui) !important;
+    text-align: left;
+    text-decoration: none !important;
+    white-space: normal;
+    overflow-wrap: anywhere;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+}
+
+body.narrreview-narratia-editor #account-list #account-menu .narra-list-item a.data {
+    padding-right: 12px !important;
+}
+
+body.narrreview-narratia-editor #account-list .narra-list-item a.data:is(:hover, :focus-visible, :active),
+body.narrreview-narratia-editor #account-list .narra-list-item.activeMenu a.data {
+    border-color: var(--nr-line) !important;
+    background: var(--nr-surface-sunken) !important;
+    color: var(--nr-ink) !important;
+    outline: none;
+}
+
+body.narrreview-narratia-editor #account-list #narratives-menu > a {
+    display: block;
+    margin-top: 6px;
+    text-decoration: none;
+}
+
+body.narrreview-narratia-editor #account-list #narratives-menu > a .dropdown-header {
+    border-top: 1px solid var(--nr-line);
+    border-bottom: 0;
+    margin-bottom: 0 !important;
+    padding-top: 12px !important;
+}
+
+body.narrreview-narratia-editor #account-list #account-menu {
+    margin-top: 12px !important;
+    padding: 8px 4px 0 !important;
+    border-top: 1px solid var(--nr-line) !important;
+}
+
+body.narrreview-narratia-editor #account-list .deleteButton {
+    top: 50% !important;
+    right: 8px !important;
+    width: 28px !important;
+    height: 28px !important;
+    transform: translateY(-50%) !important;
+    border: 0 !important;
+    border-radius: 6px !important;
+    background: var(--nr-status-closed-soft) !important;
+    color: var(--nr-status-closed) !important;
+}
+
+body.narrreview-narratia-editor #account-list .deleteButton:is(:hover, :focus-visible) {
+    background: var(--nr-status-closed) !important;
+    color: var(--nr-on-accent) !important;
+}
+
+body.narrreview-narratia-editor #account-list .deleteButton .x {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: normal;
+}
+
+body.narrreview-narratia-editor #account-list .deleteButton i {
+    font-size: 13px;
+}
+
+body.narrreview-narratia-editor #dropdown-menu-header :focus-visible {
+    outline: 2px solid var(--nr-focus);
+    outline-offset: 2px;
+}
+
 body.narrreview-narratia-editor #container.entity-column-layout > #entity-browsing-column {
     display: flex;
-    flex: 32 1 0;
+    flex: 25 1 calc(25% - 6px);
     flex-direction: column;
     gap: 8px;
     min-width: 0;
@@ -1248,7 +1912,7 @@ body.narrreview-narratia-editor #container.entity-column-layout > #entity-browsi
 }
 
 body.narrreview-narratia-editor #container.entity-column-layout > :is(#event-type, #workspace) {
-    flex: 48 1 0;
+    flex: 50 1 calc(50% - 12px);
     min-width: 0;
     width: auto;
     margin: 0;
@@ -1260,7 +1924,7 @@ body.narrreview-narratia-editor #container.entity-column-layout > #workspace {
 }
 
 body.narrreview-narratia-editor #container.entity-column-layout > #sidebar {
-    flex: 20 1 0;
+    flex: 25 1 calc(25% - 6px);
     min-width: 0;
     width: auto;
     height: 100%;
@@ -1717,11 +2381,19 @@ body.narrreview-narratia-editor #sidebar > #sidebar-title {
     text-align: left;
 }
 
-body.narrreview-narratia-editor #sidebar > #event-counter {
-    margin-block: 12px;
+body.narrreview-narratia-editor #sidebar #event-counter {
+    display: inline-flex;
+    flex: 0 0 auto;
+    align-items: center;
+    justify-content: center;
+    min-width: 24px;
+    height: 22px;
+    padding: 0 6px;
+    border-radius: 8px;
+    background: var(--nr-surface-sunken);
     color: var(--nr-ink-muted);
-    font-size: 13px;
-    line-height: 18px;
+    font: 500 12px/16px var(--nr-font-ui);
+    font-variant-numeric: tabular-nums;
 }
 
 /* Use the inspector's available row width; keep 90px event-card heights. */
@@ -1758,6 +2430,103 @@ body.narrreview-narratia-editor #sidebar #timeline > .timelineEvent:focus-visibl
     outline-offset: 2px;
 }
 
+/* Compact inspector records, not another raised card layer. Keep the legacy
+ * 90px height/drag geometry; relationship-view layouts remain untouched. */
+body.narrreview-narratia-editor #sidebar:not(.is-collapsed) #timeline:not(.withArrows) > .timelineEvent {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 32px;
+    grid-template-rows: minmax(0, 1fr) auto;
+    gap: 4px 6px;
+    min-width: 0;
+    height: 90px;
+    padding: 8px;
+    border: 1px solid var(--nr-line);
+    background-color: var(--nr-surface-raised) !important;
+    text-align: left;
+}
+
+body.narrreview-narratia-editor #sidebar:not(.is-collapsed) #timeline:not(.withArrows) > .timelineEvent:is(:hover, .timelineEvent--current) {
+    background-color: var(--nr-surface-sunken) !important;
+}
+
+body.narrreview-narratia-editor #sidebar:not(.is-collapsed) #timeline:not(.withArrows) > .timelineEvent.timelineEvent--current {
+    border-color: var(--nr-ink);
+}
+
+body.narrreview-narratia-editor #sidebar:not(.is-collapsed) #timeline:not(.withArrows) > .timelineEvent > .titleHeading {
+    display: -webkit-box;
+    grid-column: 1;
+    grid-row: 1;
+    align-self: center;
+    min-width: 0;
+    max-height: 36px;
+    padding: 0;
+    overflow: hidden;
+    overflow-wrap: anywhere;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    font: 500 13px/18px var(--nr-font-ui);
+}
+
+body.narrreview-narratia-editor #sidebar:not(.is-collapsed) #timeline:not(.withArrows) > .timelineEvent.timelineEvent--current > .titleHeading {
+    font-weight: 600;
+}
+
+body.narrreview-narratia-editor #sidebar:not(.is-collapsed) #timeline:not(.withArrows) > .timelineEvent > .dateHeading {
+    grid-column: 1;
+    grid-row: 2;
+    min-width: 0;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    color: var(--nr-ink-muted);
+    font: 400 12px/16px var(--nr-font-ui);
+    font-variant-numeric: tabular-nums;
+}
+
+body.narrreview-narratia-editor #sidebar:not(.is-collapsed) #timeline:not(.withArrows) > .timelineEvent > .deleteButton {
+    display: inline-flex;
+    position: static;
+    grid-column: 2;
+    grid-row: 1 / span 2;
+    align-self: center;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    min-width: 32px;
+    height: 32px;
+    padding: 0;
+    border: 0;
+    border-radius: 8px;
+    background: transparent;
+    color: var(--nr-ink-muted);
+    font: 400 14px/1 var(--nr-font-ui);
+    cursor: pointer;
+}
+
+body.narrreview-narratia-editor #sidebar:not(.is-collapsed) #timeline:not(.withArrows) > .timelineEvent > .deleteButton:is(:hover, :focus-visible) {
+    background: var(--nr-status-closed-soft);
+    color: var(--nr-status-closed);
+}
+
+body.narrreview-narratia-editor #sidebar:not(.is-collapsed) #timeline:not(.withArrows) > .timelineEvent > .deleteButton:is([aria-disabled="true"], .disabledButton) {
+    opacity: .45;
+    cursor: not-allowed;
+}
+
+body.narrreview-narratia-editor #sidebar:not(.is-collapsed) #timeline:not(.withArrows) > .timelineEvent > .deleteButton > .x {
+    color: inherit;
+    font-size: 14px;
+    line-height: 1;
+}
+
+body.narrreview-narratia-editor #sidebar:not(.is-collapsed) #timeline:not(.withArrows) > .timelineEvent > :is(.titleHeading, .deleteButton):focus-visible {
+    outline: 2px solid var(--nr-focus);
+    outline-offset: 2px;
+}
+
 @media (prefers-reduced-motion: reduce) {
     body.narrreview-narratia-editor #sidebar #timeline > .timelineEvent {
         transition: none;
@@ -1765,23 +2534,25 @@ body.narrreview-narratia-editor #sidebar #timeline > .timelineEvent:focus-visibl
 }
 
 /* The event sidebar collapses into a navigation rail, not a hidden list. */
-body.narrreview-narratia-editor #container.entity-sidebar-collapsed > #entity-browsing-column {
-    /* Same 32% share of the row width remaining after the 24px gutters/gaps. */
-    flex: 0 0 calc(32% - 7.68px);
+body.narrreview-narratia-editor #container.entity-column-layout.event-sidebar-collapsed > #entity-browsing-column {
+    /* Keep the browser at its expanded 25% pixel width while the released
+     * sidebar space is assigned to the central workspace. */
+    flex: 0 0 calc(25% - 6px);
 }
 
-body.narrreview-narratia-editor #container.entity-sidebar-collapsed > :is(#workspace, #event-type) {
+body.narrreview-narratia-editor #container.entity-column-layout.event-sidebar-collapsed > :is(#workspace, #event-type) {
     flex: 1 1 0;
     min-width: 0;
 }
 
 
-body.narrreview-narratia-editor #sidebar.is-collapsed {
+body.narrreview-narratia-editor #container.entity-column-layout > #sidebar.is-collapsed {
     display: flex;
     flex: 0 0 64px;
     flex-direction: column;
     align-items: stretch;
     min-width: 64px;
+    max-width: 64px;
     width: 64px;
     min-height: 0;
     padding: 6px;
@@ -1799,10 +2570,15 @@ body.narrreview-narratia-editor #sidebar > .event-sidebar-heading {
 }
 
 body.narrreview-narratia-editor #sidebar .event-sidebar-heading > #sidebar-title {
+    display: flex;
     flex: 1 1 auto;
     min-width: 0;
     width: auto;
     margin: 0;
+    align-items: center;
+    gap: 6px;
+    white-space: nowrap;
+    font: 600 14px/20px var(--nr-font-ui);
     text-align: left;
 }
 
@@ -1812,7 +2588,7 @@ body.narrreview-narratia-editor #event-sidebar-toggle {
     align-items: center;
     justify-content: center;
     gap: 6px;
-    min-width: 40px;
+    min-width: 44px;
     min-height: 40px;
     padding: 6px 10px;
     border: 1px solid var(--nr-line-strong);
@@ -1837,6 +2613,15 @@ body.narrreview-narratia-editor #event-sidebar-toggle i {
     flex: 0 0 auto;
 }
 
+body.narrreview-narratia-editor #sidebar:not(.is-collapsed) #event-sidebar-toggle {
+    width: 36px;
+    min-width: 36px;
+    min-height: 36px;
+    height: 36px;
+    padding: 6px;
+    border-radius: 10px;
+}
+
 body.narrreview-narratia-editor #sidebar:not(.is-collapsed) #timeline > .timelineEvent > .event-compact-number {
     display: none;
 }
@@ -1856,7 +2641,6 @@ body.narrreview-narratia-editor #sidebar.is-collapsed > .event-sidebar-heading {
 
 body.narrreview-narratia-editor #sidebar.is-collapsed > .event-sidebar-heading > #sidebar-title,
 body.narrreview-narratia-editor #sidebar.is-collapsed > #eventSearchDiv,
-body.narrreview-narratia-editor #sidebar.is-collapsed > #event-counter,
 body.narrreview-narratia-editor #sidebar.is-collapsed > #overlay,
 body.narrreview-narratia-editor #sidebar.is-collapsed > #bottomTimeline,
 body.narrreview-narratia-editor #sidebar.is-collapsed > #relHelpContainer {
@@ -1872,7 +2656,7 @@ body.narrreview-narratia-editor #sidebar.is-collapsed #event-sidebar-toggle {
     border-radius: 12px;
 }
 
-body.narrreview-narratia-editor #sidebar.is-collapsed #event-sidebar-toggle-label {
+body.narrreview-narratia-editor #sidebar #event-sidebar-toggle-label {
     position: absolute;
     width: 1px;
     height: 1px;
@@ -1941,7 +2725,8 @@ body.narrreview-narratia-editor #sidebar.is-collapsed #timeline > .timelineEvent
     height: 100%;
     border-radius: 12px;
     color: var(--nr-ink-muted);
-    font: 600 13px/18px var(--nr-font-ui);
+    font: 600 12px/18px var(--nr-font-ui);
+    font-variant-numeric: tabular-nums;
     cursor: pointer;
 }
 
@@ -1957,5 +2742,971 @@ body.narrreview-narratia-editor #sidebar.is-collapsed #timeline > .timelineEvent
 
 body.narrreview-narratia-editor #sidebar.is-collapsed #timeline > .timelineEvent .event-compact-number:focus-visible {
     outline: 2px solid var(--nr-focus);
+    outline-offset: -2px;
+}
+
+/* The Librarian story home: page-scoped proportions and runtime table styling. */
+body.narrreview-narratia-home {
+    min-width: 0;
+    height: auto !important;
+    min-height: 100vh;
+    overflow-x: hidden;
+    overflow-y: auto;
+    font-family: var(--nr-font-ui);
+    font-variant-numeric: lining-nums;
+}
+
+/* The legacy intro page reserves an 84%-height spacer before #introDiv.
+ * The home header now provides the only top rhythm, so the spacer must not
+ * participate in the document flow. */
+body.narrreview-narratia-home #emptyDiv {
+    display: none !important;
+    width: 0 !important;
+    height: 0 !important;
+    min-height: 0 !important;
+    margin: 0 !important;
+    padding: 0 !important;
+}
+
+body.narrreview-narratia-home #introDiv {
+    position: relative !important;
+    width: min(1320px, calc(100% - 64px));
+    height: auto !important;
+    min-height: 0 !important;
+    margin: 24px auto 40px !important;
+    padding: 40px clamp(28px, 4vw, 56px) 48px !important;
+    border: 1px solid var(--nr-line) !important;
+    border-radius: 16px !important;
+    background: var(--nr-surface-raised) !important;
+    overflow: visible !important;
+}
+
+body.narrreview-narratia-home .home-hero {
+    margin: 0 auto;
+    text-align: center;
+}
+
+body.narrreview-narratia-home #topTitle {
+    display: block;
+    width: 100%;
+    height: auto;
+    margin: 0;
+    padding: 0;
+    overflow: visible;
+    color: var(--nr-ink);
+    font: 500 52px/1.08 var(--nr-font-editorial);
+    letter-spacing: -0.03em;
+    white-space: normal;
+}
+
+body.narrreview-narratia-home .home-subtitle {
+    max-width: 42ch;
+    margin: 12px auto 0;
+    color: var(--nr-ink-muted);
+    font: 400 20px/1.45 var(--nr-font-ui);
+}
+
+body.narrreview-narratia-home #otherSearch {
+    display: grid !important;
+    grid-template-columns: minmax(0, 1fr) minmax(300px, 1.05fr);
+    align-items: center;
+    gap: 24px;
+    width: 100% !important;
+    max-width: 920px;
+    margin: 36px auto 0 !important;
+    text-align: left;
+}
+
+body.narrreview-narratia-home #otherSearch > h2.subjectName {
+    margin: 0 !important;
+    padding: 0;
+    border: 0;
+    color: var(--nr-ink);
+    font: 600 22px/1.3 var(--nr-font-ui);
+    text-align: left;
+    white-space: normal;
+}
+
+body.narrreview-narratia-home .home-search-control {
+    position: relative !important;
+    display: flex;
+    align-items: center;
+    min-width: 0;
+    min-height: 52px;
+    padding: 8px 14px;
+    border: 1px solid var(--nr-line-strong);
+    border-radius: 12px;
+    background: var(--nr-surface-raised);
+    color: var(--nr-ink-muted);
+    transition: border-color 160ms ease, background-color 160ms ease;
+}
+
+body.narrreview-narratia-home .home-search-control:focus-within {
+    border-color: var(--nr-focus);
+    background: var(--nr-surface-raised);
+    outline: 2px solid var(--nr-focus);
     outline-offset: 2px;
+}
+
+body.narrreview-narratia-home .home-search-control > .fa {
+    flex: 0 0 auto;
+    margin-right: 12px;
+    font-size: 16px;
+    color: var(--nr-ink-muted);
+}
+
+body.narrreview-narratia-home .home-search-control .twitter-typeahead {
+    position: static !important;
+    flex: 1 1 auto !important;
+    width: 100% !important;
+    min-width: 0 !important;
+}
+
+body.narrreview-narratia-home #otherSearch #wd-search {
+    width: 100% !important;
+    min-width: 0;
+    height: 36px;
+    padding: 0;
+    border: 0 !important;
+    outline: 0 !important;
+    background: transparent !important;
+    box-shadow: none !important;
+    color: var(--nr-ink);
+    font: 400 16px/24px var(--nr-font-ui);
+    text-align: left !important;
+}
+
+body.narrreview-narratia-home #otherSearch #wd-search::placeholder {
+    color: var(--nr-ink-muted);
+    opacity: 1;
+}
+
+/* Typeahead autocomplete dropdown for Narratia theme */
+body.narrreview-narratia-theme .tt-menu {
+    position: absolute !important;
+    top: calc(100% + 8px) !important;
+    left: 0 !important;
+    right: 0 !important;
+    z-index: 1050 !important;
+    width: 100% !important;
+    max-height: clamp(240px, 50vh, 400px) !important;
+    overflow-x: hidden !important;
+    overflow-y: auto !important;
+    margin: 0 !important;
+    padding: 6px 0 !important;
+    border: 1px solid var(--nr-line) !important;
+    border-radius: 12px !important;
+    background: var(--nr-surface-raised) !important;
+    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.12) !important;
+    overscroll-behavior: contain;
+}
+
+body.narrreview-narratia-theme .tt-dataset {
+    width: 100% !important;
+}
+
+body.narrreview-narratia-theme .tt-suggestion {
+    display: block !important;
+    width: 100% !important;
+    margin: 0 !important;
+    padding: 10px 16px !important;
+    border: 0 !important;
+    border-bottom: 1px solid var(--nr-line) !important;
+    background: transparent !important;
+    color: var(--nr-ink) !important;
+    font-size: 14px !important;
+    line-height: 20px !important;
+    text-align: left !important;
+    cursor: pointer !important;
+    transition: background-color 120ms ease;
+}
+
+body.narrreview-narratia-theme .tt-suggestion:last-child {
+    border-bottom: 0 !important;
+}
+
+body.narrreview-narratia-theme .tt-suggestion:hover,
+body.narrreview-narratia-theme .tt-suggestion.tt-cursor {
+    background-color: var(--nr-surface-sunken) !important;
+    color: var(--nr-ink) !important;
+}
+
+body.narrreview-narratia-theme .tt-suggestion-content {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 2px !important;
+    width: 100% !important;
+    text-align: left !important;
+}
+
+body.narrreview-narratia-theme .tt-suggestion-label {
+    color: var(--nr-ink) !important;
+    font: 600 15px/20px var(--nr-font-ui) !important;
+    text-align: left !important;
+    overflow-wrap: anywhere !important;
+}
+
+body.narrreview-narratia-theme .tt-suggestion-description {
+    color: var(--nr-ink-muted) !important;
+    font: 400 13px/18px var(--nr-font-ui) !important;
+    text-align: left !important;
+    overflow-wrap: anywhere !important;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+body.narrreview-narratia-home #jsonImport {
+    width: 100%;
+    max-width: 920px;
+    margin: 32px auto 0 !important;
+    padding-top: 28px !important;
+    border-top: 1px solid var(--nr-line) !important;
+    text-align: center !important;
+}
+
+body.narrreview-narratia-home #jsonImport > h2.json-import-title {
+    width: 100%;
+    margin: 0 auto 16px !important;
+    color: var(--nr-ink-muted);
+    font: 500 16px/22px var(--nr-font-ui);
+    text-align: center !important;
+    white-space: normal;
+}
+
+body.narrreview-narratia-home #json-import-form {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    justify-content: center !important;
+    width: 100% !important;
+    margin: 0 auto !important;
+    text-align: center !important;
+}
+
+body.narrreview-narratia-home .json-import-controls {
+    display: flex !important;
+    flex-direction: row !important;
+    flex-wrap: wrap !important;
+    align-items: center !important;
+    justify-content: center !important;
+    gap: 12px !important;
+    width: 100% !important;
+    margin: 0 auto !important;
+}
+
+body.narrreview-narratia-home .json-import-controls :is(.json-file-label, #json-import-button) {
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    gap: 8px !important;
+    min-height: 44px !important;
+    margin: 0 !important;
+    padding: 0 20px !important;
+    border: 1px solid var(--nr-line-strong) !important;
+    border-radius: 8px !important;
+    background: var(--nr-surface-raised) !important;
+    color: var(--nr-ink) !important;
+    font: 600 14px/20px var(--nr-font-ui) !important;
+    box-shadow: none !important;
+    float: none !important;
+    cursor: pointer !important;
+}
+
+body.narrreview-narratia-home .json-import-controls :is(.json-file-label, #json-import-button):is(:hover, :active) {
+    border-color: var(--nr-ink) !important;
+    background: var(--nr-surface-sunken) !important;
+    color: var(--nr-ink) !important;
+}
+
+body.narrreview-narratia-home .json-import-controls :is(.json-file-label, #json-import-button):focus-visible {
+    outline: 2px solid var(--nr-focus) !important;
+    outline-offset: 2px !important;
+}
+
+body.narrreview-narratia-home .json-import-controls :is(.json-file-label, #json-import-button) > .fa {
+    font-size: 15px;
+    line-height: 1;
+}
+
+body.narrreview-narratia-home #json-import-button:disabled {
+    border-color: var(--nr-line) !important;
+    background: var(--nr-surface-sunken) !important;
+    color: var(--nr-ink-muted) !important;
+    opacity: 0.6 !important;
+    cursor: wait !important;
+}
+
+body.narrreview-narratia-home #json-import-status {
+    width: 100% !important;
+    max-width: 560px;
+    margin: 8px auto 0 !important;
+    color: var(--nr-ink-muted);
+    font: 400 14px/20px var(--nr-font-ui);
+    text-align: center !important;
+}
+
+body.narrreview-narratia-home .json-import-help {
+    width: 100%;
+    max-width: 62ch;
+    margin: 10px auto 0 !important;
+    color: var(--nr-ink-muted);
+    font: 400 14px/21px var(--nr-font-ui);
+    text-align: center !important;
+}
+
+body.narrreview-narratia-home #userDBs {
+    position: relative !important;
+    top: auto !important;
+    bottom: auto !important;
+    left: auto !important;
+    right: auto !important;
+    display: block !important;
+    width: 100% !important;
+    max-width: 1208px;
+    height: auto !important;
+    min-height: 0 !important;
+    margin: 40px auto 0 !important;
+    padding: 0 !important;
+    overflow: visible !important;
+    white-space: normal !important;
+    border: 0 !important;
+    background: transparent !important;
+    text-align: left !important;
+}
+
+body.narrreview-narratia-home #story-list-heading {
+    width: auto;
+    margin: 0 0 16px !important;
+    color: var(--nr-ink);
+    font: 600 24px/1.3 var(--nr-font-ui);
+    text-align: left !important;
+    white-space: normal;
+}
+
+body.narrreview-narratia-home .home-table-scroll {
+    width: 100%;
+    overflow-x: auto;
+    overflow-y: visible;
+    border: 1px solid var(--nr-line);
+    border-radius: 12px;
+    background: var(--nr-surface-raised);
+    overscroll-behavior-x: contain;
+}
+
+body.narrreview-narratia-home #dataTable_wrapper {
+    width: 100%;
+    min-width: 0;
+    padding: 16px;
+    color: var(--nr-ink-muted);
+    font: 400 14px/20px var(--nr-font-ui);
+}
+
+body.narrreview-narratia-home #dataTable_wrapper::after {
+    content: "";
+    display: table;
+    clear: both;
+}
+
+body.narrreview-narratia-home #dataTable {
+    width: 100% !important;
+    min-width: 560px;
+    margin: 12px 0 !important;
+    border-collapse: separate;
+    border-spacing: 0;
+    color: var(--nr-ink);
+    font: 400 15px/22px var(--nr-font-ui);
+    text-align: left;
+}
+
+body.narrreview-narratia-home #dataTable thead,
+body.narrreview-narratia-home #dataTable thead tr,
+body.narrreview-narratia-home #dataTable tr.even,
+body.narrreview-narratia-home #dataTable tr.odd {
+    background: var(--nr-surface-raised);
+}
+
+body.narrreview-narratia-home #dataTable thead th {
+    padding: 14px 16px;
+    border-bottom: 1px solid var(--nr-line-strong);
+    background: var(--nr-surface-sunken);
+    color: var(--nr-ink);
+    font: 600 13px/18px var(--nr-font-ui);
+    white-space: nowrap;
+}
+
+body.narrreview-narratia-home #dataTable tbody td {
+    padding: 12px 16px;
+    border-bottom: 1px solid var(--nr-line);
+    background: transparent;
+    color: var(--nr-ink);
+    vertical-align: middle;
+}
+
+body.narrreview-narratia-home #dataTable tbody tr:last-child td {
+    border-bottom: 0;
+}
+
+body.narrreview-narratia-home #dataTable tbody tr:is(.odd, .even):hover td {
+    background: var(--nr-surface-sunken);
+}
+
+body.narrreview-narratia-home #dataTable tbody td:first-child {
+    color: var(--nr-ink-muted);
+    font-variant-numeric: tabular-nums;
+    white-space: nowrap;
+}
+
+body.narrreview-narratia-home #dataTable tbody td:nth-child(2) {
+    overflow-wrap: anywhere;
+}
+
+body.narrreview-narratia-home #dataTable tbody td:nth-child(2) a {
+    color: var(--nr-ink);
+    font-weight: 600;
+    text-decoration-color: transparent;
+    text-underline-offset: 3px;
+    transition: text-decoration-color 150ms ease;
+}
+
+body.narrreview-narratia-home #dataTable tbody td:nth-child(2) a:is(:hover, :focus-visible) {
+    color: var(--nr-ink);
+    text-decoration: underline;
+    text-decoration-color: currentColor;
+}
+
+body.narrreview-narratia-home #dataTable tbody td:last-child {
+    text-align: center;
+    white-space: nowrap;
+}
+
+body.narrreview-narratia-home #dataTable button.narrative-delete-control {
+    min-width: 40px;
+    min-height: 40px;
+    border-radius: 8px;
+    transition: background-color 150ms ease, color 150ms ease, border-color 150ms ease;
+}
+
+body.narrreview-narratia-home #dataTable_wrapper .dataTables_length,
+body.narrreview-narratia-home #dataTable_wrapper .dataTables_filter {
+    display: flex !important;
+    align-items: center !important;
+    width: auto !important;
+    margin: 0 0 16px !important;
+    padding: 0 !important;
+    border: 0 !important;
+    background: transparent !important;
+    box-shadow: none !important;
+    color: var(--nr-ink-muted);
+    font: 500 14px/20px var(--nr-font-ui);
+}
+
+body.narrreview-narratia-home #dataTable_wrapper .dataTables_length {
+    float: left !important;
+}
+
+body.narrreview-narratia-home #dataTable_wrapper .dataTables_filter {
+    float: right !important;
+}
+
+body.narrreview-narratia-home #dataTable_wrapper :is(.dataTables_length, .dataTables_filter) label {
+    display: flex !important;
+    align-items: center !important;
+    gap: 8px !important;
+    width: auto !important;
+    min-width: 0 !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    border: 0 !important;
+    background: transparent !important;
+    box-shadow: none !important;
+    color: var(--nr-ink-muted) !important;
+    font: 500 14px/20px var(--nr-font-ui) !important;
+    text-align: left !important;
+}
+
+body.narrreview-narratia-home #dataTable_wrapper .dataTables_filter input,
+body.narrreview-narratia-home #dataTable_wrapper .dataTables_length select {
+    width: auto !important;
+    min-height: 40px;
+    margin: 0 !important;
+    padding: 6px 12px;
+    border: 1px solid var(--nr-line-strong) !important;
+    border-radius: 8px !important;
+    background: var(--nr-surface-raised) !important;
+    color: var(--nr-ink) !important;
+    font: 400 14px/20px var(--nr-font-ui);
+}
+
+body.narrreview-narratia-home #dataTable_wrapper .dataTables_filter input {
+    max-width: min(260px, 56vw);
+}
+
+body.narrreview-narratia-home #dataTable_wrapper :is(.dataTables_filter input, .dataTables_length select):focus {
+    border-color: var(--nr-focus);
+    box-shadow: none;
+}
+
+body.narrreview-narratia-home #dataTable_wrapper :is(.dataTables_filter input, .dataTables_length select):focus-visible {
+    outline: 2px solid var(--nr-focus);
+    outline-offset: 2px;
+}
+
+body.narrreview-narratia-home #dataTable_wrapper .dataTables_info {
+    clear: both;
+    padding-top: 14px;
+    color: var(--nr-ink-muted);
+}
+
+body.narrreview-narratia-home #dataTable_wrapper .dataTables_paginate {
+    padding-top: 10px;
+}
+
+body.narrreview-narratia-home #dataTable_wrapper .dataTables_paginate .paginate_button {
+    min-width: 36px;
+    min-height: 40px;
+    margin-left: 4px;
+    padding: 6px 10px;
+    border: 1px solid transparent !important;
+    border-radius: 8px;
+    background: transparent !important;
+    color: var(--nr-ink) !important;
+    font: 500 14px/20px var(--nr-font-ui);
+}
+
+body.narrreview-narratia-home #dataTable_wrapper .dataTables_paginate .paginate_button:is(:hover, :focus-visible) {
+    border-color: var(--nr-line-strong) !important;
+    background: var(--nr-surface-sunken) !important;
+    color: var(--nr-ink) !important;
+}
+
+body.narrreview-narratia-home #dataTable_wrapper .dataTables_paginate .paginate_button.current {
+    border-color: var(--nr-ink) !important;
+    background: var(--nr-ink) !important;
+    color: var(--nr-on-accent) !important;
+}
+
+body.narrreview-narratia-home #dataTable_wrapper .dataTables_paginate .paginate_button.disabled {
+    color: var(--nr-ink-muted) !important;
+    opacity: 0.6;
+}
+
+body.narrreview-narratia-home > p.home-legal {
+    width: min(1320px, calc(100% - 48px));
+    margin: 24px auto 0;
+    padding-bottom: 32px;
+    color: var(--nr-ink-muted);
+    font: 400 13px/1.7 var(--nr-font-ui);
+    text-align: center;
+}
+
+/*
+ * Home Page Header Navigation — Narratia Design System
+ */
+body.narrreview-narratia-home .home-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: min(1320px, calc(100% - 48px));
+    margin: 0 auto;
+    padding: 20px 0 12px;
+    box-sizing: border-box;
+    position: relative;
+    z-index: 100;
+}
+
+body.narrreview-narratia-home .home-header-left,
+body.narrreview-narratia-home .home-header-right {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+body.narrreview-narratia-home .home-user-dropdown {
+    position: relative !important;
+    top: auto !important;
+    border: none !important;
+}
+
+body.narrreview-narratia-home .home-nav-btn {
+    position: relative !important;
+    top: auto !important;
+    right: auto !important;
+    left: auto !important;
+    display: inline-flex !important;
+    align-items: center;
+    gap: 8px;
+    height: 38px;
+    padding: 0 18px;
+    border-radius: 19px;
+    background-color: var(--nr-surface-raised, #ffffff) !important;
+    border: 1px solid var(--nr-line-strong, #8a8a8a) !important;
+    color: var(--nr-ink, #0a0a0a) !important;
+    font-family: var(--nr-font-ui, "Source Sans 3", system-ui, sans-serif);
+    font-size: 13px;
+    font-weight: 600;
+    line-height: 1;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    cursor: pointer;
+    box-shadow: none !important;
+    transition: background-color 0.15s ease, border-color 0.15s ease, color 0.15s ease;
+}
+
+body.narrreview-narratia-home .home-nav-btn:hover,
+body.narrreview-narratia-home .home-nav-btn:focus,
+body.narrreview-narratia-home .home-nav-btn:active,
+body.narrreview-narratia-home .open > .home-nav-btn.dropdown-toggle {
+    background-color: var(--nr-surface-sunken, #f0f0f0) !important;
+    border-color: var(--nr-ink, #0a0a0a) !important;
+    color: var(--nr-ink, #0a0a0a) !important;
+    outline: none !important;
+}
+
+body.narrreview-narratia-home .home-user-badge {
+    display: inline-flex !important;
+    align-items: center;
+    font-family: var(--nr-font-ui, "Source Sans 3", system-ui, sans-serif);
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--nr-ink, #0a0a0a);
+    padding: 0 10px;
+    height: 38px;
+    line-height: 38px;
+    letter-spacing: 0.03em;
+    position: relative !important;
+    top: auto !important;
+    right: auto !important;
+    left: auto !important;
+}
+
+body.narrreview-narratia-home #userName.home-user-badge::before {
+    content: "\f007";
+    font-family: "Font Awesome 6 Free";
+    font-weight: 900;
+    margin-right: 8px;
+    color: var(--nr-ink-muted, #5c5c5c);
+    font-size: 13px;
+}
+
+body.narrreview-narratia-home #home[style*="display: none"],
+body.narrreview-narratia-home #userName[style*="display: none"],
+body.narrreview-narratia-home #userMenu[style*="display: none"],
+body.narrreview-narratia-home .home-user-badge:empty {
+    display: none !important;
+}
+
+body.narrreview-narratia-home .home-user-dropdown .dropdown-menu-right {
+    position: absolute !important;
+    top: calc(100% + 8px) !important;
+    right: 0 !important;
+    left: auto !important;
+    width: min(380px, calc(100vw - 32px)) !important;
+    min-width: 320px !important;
+    max-width: calc(100vw - 32px) !important;
+    margin: 0 !important;
+    padding: 8px 0 12px !important;
+    border-radius: 14px !important;
+    border: 1px solid var(--nr-line, #e2e2e2) !important;
+    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.12), 0 2px 6px rgba(0, 0, 0, 0.04) !important;
+    background-color: var(--nr-surface-raised, #ffffff) !important;
+    z-index: 1050 !important;
+    overflow: hidden !important;
+}
+
+body.narrreview-narratia-home #narratives-menu {
+    max-height: min(420px, 60vh) !important;
+    overflow-y: auto !important;
+    overflow-x: hidden !important;
+    padding: 0 8px !important;
+    scrollbar-width: thin;
+    scrollbar-color: var(--nr-line-strong, #8a8a8a) transparent;
+}
+
+body.narrreview-narratia-home #narratives-menu::-webkit-scrollbar {
+    width: 6px;
+}
+
+body.narrreview-narratia-home #narratives-menu::-webkit-scrollbar-thumb {
+    background-color: var(--nr-line-strong, #8a8a8a);
+    border-radius: 3px;
+}
+
+body.narrreview-narratia-home #narratives-menu::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+body.narrreview-narratia-home .home-user-dropdown .dropdown-header {
+    padding: 10px 12px 6px !important;
+    margin: 0 !important;
+    font-family: var(--nr-font-ui, "Source Sans 3", system-ui, sans-serif) !important;
+    font-size: 11px !important;
+    font-weight: 700 !important;
+    text-transform: uppercase !important;
+    letter-spacing: 0.08em !important;
+    color: var(--nr-ink-muted, #5c5c5c) !important;
+    list-style: none !important;
+    border-bottom: 1px solid var(--nr-line, #e2e2e2) !important;
+    margin-bottom: 6px !important;
+    background-color: var(--nr-surface-raised, #ffffff) !important;
+}
+
+body.narrreview-narratia-home #narratives-menu #my-narratives.dropdown-header {
+    position: sticky !important;
+    top: 0 !important;
+    z-index: 10 !important;
+}
+
+body.narrreview-narratia-home #narratives-menu > a {
+    display: block !important;
+    text-decoration: none !important;
+    margin-top: 6px !important;
+}
+
+body.narrreview-narratia-home #narratives-menu > a .dropdown-header {
+    color: var(--nr-ink, #0a0a0a) !important;
+    border-top: 1px solid var(--nr-line, #e2e2e2) !important;
+    border-bottom: none !important;
+    padding-top: 12px !important;
+    margin-bottom: 0 !important;
+    transition: color 0.15s ease;
+}
+
+body.narrreview-narratia-home #narratives-menu > a:hover .dropdown-header {
+    color: var(--nr-accent-hover, #2e2e2e) !important;
+}
+
+body.narrreview-narratia-home .home-user-dropdown .narra-list-item {
+    position: relative !important;
+    display: block !important;
+    width: 100% !important;
+    height: auto !important;
+    margin: 2px 0 !important;
+    padding: 0 !important;
+    list-style: none !important;
+    box-sizing: border-box !important;
+}
+
+body.narrreview-narratia-home .home-user-dropdown .narra-list-item a.data {
+    display: -webkit-box !important;
+    -webkit-line-clamp: 2 !important;
+    -webkit-box-orient: vertical !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+    white-space: normal !important;
+    word-break: break-word !important;
+    overflow-wrap: anywhere !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
+    padding: 10px 42px 10px 12px !important;
+    margin: 0 !important;
+    height: auto !important;
+    min-height: 40px !important;
+    line-height: 1.4 !important;
+    border: 1px solid transparent !important;
+    border-radius: 8px !important;
+    background-color: transparent !important;
+    color: var(--nr-ink, #0a0a0a) !important;
+    font-family: var(--nr-font-ui, "Source Sans 3", system-ui, sans-serif) !important;
+    font-size: 14px !important;
+    font-weight: 500 !important;
+    text-align: left !important;
+    text-decoration: none !important;
+    transition: background-color 0.15s ease, color 0.15s ease, border-color 0.15s ease;
+}
+
+body.narrreview-narratia-home .home-user-dropdown #account-menu .narra-list-item a.data {
+    padding-right: 12px !important;
+}
+
+body.narrreview-narratia-home .home-user-dropdown .narra-list-item a.data:hover,
+body.narrreview-narratia-home .home-user-dropdown .narra-list-item a.data:focus-visible,
+body.narrreview-narratia-home .home-user-dropdown .narra-list-item a.data:active {
+    background-color: var(--nr-surface-sunken, #f0f0f0) !important;
+    color: var(--nr-ink, #0a0a0a) !important;
+    border-color: var(--nr-line, #e2e2e2) !important;
+    outline: none !important;
+}
+
+body.narrreview-narratia-home .home-user-dropdown .deleteButton {
+    position: absolute !important;
+    top: 50% !important;
+    right: 8px !important;
+    transform: translateY(-50%) !important;
+    width: 28px !important;
+    height: 28px !important;
+    border-radius: 6px !important;
+    border: none !important;
+    background-color: var(--nr-status-closed-soft, #fde8e8) !important;
+    color: var(--nr-status-closed, #c4161c) !important;
+    display: none;
+    align-items: center !important;
+    justify-content: center !important;
+    cursor: pointer !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    box-shadow: none !important;
+    transition: background-color 0.15s ease, color 0.15s ease;
+    z-index: 2;
+}
+
+body.narrreview-narratia-home .home-user-dropdown .deleteButton:hover,
+body.narrreview-narratia-home .home-user-dropdown .deleteButton:focus-visible {
+    background-color: var(--nr-status-closed, #c4161c) !important;
+    color: #ffffff !important;
+    outline: none !important;
+}
+
+body.narrreview-narratia-home .home-user-dropdown .deleteButton .x {
+    font-weight: normal !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+}
+
+body.narrreview-narratia-home .home-user-dropdown .deleteButton i {
+    font-size: 13px !important;
+}
+
+body.narrreview-narratia-home .home-user-dropdown #account-menu {
+    margin-top: 8px !important;
+    padding: 8px 8px 0 !important;
+    border-top: 1px solid var(--nr-line, #e2e2e2) !important;
+}
+
+body.narrreview-narratia-home :is(#introDiv, #dataTable_wrapper) :focus-visible {
+    outline: 2px solid var(--nr-focus);
+    outline-offset: 2px;
+}
+
+@media (max-width: 1023px) {
+    body.narrreview-narratia-home #introDiv {
+        width: calc(100% - 40px);
+        padding: 32px 28px 40px !important;
+    }
+
+    body.narrreview-narratia-home #topTitle {
+        font-size: 46px;
+    }
+
+    body.narrreview-narratia-home #otherSearch {
+        max-width: 780px;
+        gap: 18px;
+    }
+
+    body.narrreview-narratia-home #otherSearch > h2.subjectName {
+        font-size: 21px;
+    }
+}
+
+@media (max-width: 767px) {
+    body.narrreview-narratia-home #introDiv {
+        width: calc(100% - 24px);
+        margin: 16px auto 24px !important;
+        padding: 28px 20px 32px !important;
+        border-radius: 12px !important;
+    }
+
+    body.narrreview-narratia-home #topTitle {
+        font-size: 40px;
+    }
+
+    body.narrreview-narratia-home .home-subtitle {
+        margin-top: 10px;
+        font-size: 18px;
+    }
+
+    body.narrreview-narratia-home #otherSearch {
+        display: grid !important;
+        grid-template-columns: minmax(0, 1fr);
+        gap: 12px;
+        width: 100% !important;
+        margin-top: 30px !important;
+    }
+
+    body.narrreview-narratia-home #otherSearch > h2.subjectName {
+        margin-bottom: 0 !important;
+        font-size: 20px;
+        line-height: 1.35;
+    }
+
+    body.narrreview-narratia-home #otherSearch > .home-search-control {
+        display: flex !important;
+        width: 100%;
+        max-width: none;
+    }
+
+    body.narrreview-narratia-home #jsonImport {
+        margin-top: 26px !important;
+        padding-top: 20px !important;
+    }
+
+    body.narrreview-narratia-home #json-import-form {
+        justify-content: center !important;
+    }
+
+    body.narrreview-narratia-home #jsonImport > h2.json-import-title {
+        text-align: center !important;
+    }
+
+    body.narrreview-narratia-home .json-import-controls :is(.json-file-label, #json-import-button) {
+        flex: 1 1 150px;
+    }
+
+    body.narrreview-narratia-home #userDBs {
+        margin-top: 36px !important;
+    }
+
+    body.narrreview-narratia-home #story-list-heading {
+        font-size: 21px;
+    }
+
+    body.narrreview-narratia-home #dataTable_wrapper .dataTables_length,
+    body.narrreview-narratia-home #dataTable_wrapper .dataTables_filter {
+        float: none;
+        width: 100% !important;
+        text-align: left;
+    }
+
+    body.narrreview-narratia-home #dataTable_wrapper .dataTables_filter input {
+        max-width: calc(100% - 82px);
+    }
+
+    body.narrreview-narratia-home #dataTable_wrapper .dataTables_info,
+    body.narrreview-narratia-home #dataTable_wrapper .dataTables_paginate {
+        float: none;
+        text-align: left;
+    }
+
+    body.narrreview-narratia-home #dataTable_wrapper .dataTables_paginate .paginate_button {
+        margin: 4px 4px 0 0;
+    }
+
+    body.narrreview-narratia-home > p.home-legal {
+        width: calc(100% - 32px);
+        font-size: 13px;
+    }
+}
+
+@media (max-width: 420px) {
+    body.narrreview-narratia-home #introDiv {
+        padding-right: 16px !important;
+        padding-left: 16px !important;
+    }
+
+    body.narrreview-narratia-home #topTitle {
+        font-size: 36px;
+    }
+
+    body.narrreview-narratia-home .json-import-controls :is(.json-file-label, #json-import-button) {
+        flex-basis: 100%;
+        width: 100%;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    body.narrreview-narratia-home :is(.home-search-control, #dataTable tbody td:nth-child(2) a, #dataTable button.narrative-delete-control) {
+        transition: none;
+    }
 }

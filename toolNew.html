@@ -237,6 +237,7 @@
                 <div class="form-control form-table" id="entitiesDiv">
                     <div id="inputDiv">
                         <div id="inputHelp">Drop entities here!</div>
+                        <span id="event-entity-drop-hint" class="nr-event-entity-drop-hint" role="status" aria-live="polite" hidden></span>
                     </div>
                 </div>
 
@@ -439,7 +440,7 @@
 
 		<div id="sidebar" class="js-hide-popovers">
 			<div class="event-sidebar-heading">
-				<h4 id="sidebar-title">Events</h4>
+				<h4 id="sidebar-title">Events <span id="event-counter" class="not-selectable" role="status" aria-label="0 events" aria-live="polite" aria-atomic="true"><span id="events-counter">0</span></span></h4>
 				<button type="button" id="event-sidebar-toggle" aria-label="Collapse event sidebar" aria-expanded="true" aria-controls="timeline" title="Collapse event sidebar">
 					<i class="fa-solid fa-angles-right" aria-hidden="true"></i><span id="event-sidebar-toggle-label">Collapse</span>
 				</button>
@@ -447,10 +448,6 @@
 			<div id="eventSearchDiv" style="margin-top: 1.5%;text-align: center;">
 				<label for="eventSearch" style="display: none;"></label>
 				<input placeholder="Filter events" id="eventSearch" type="text" style="width:50%; border-radius:25px;">
-			</div>
-
-			<div id="event-counter" class="not-selectable">
-				<span id="counter-text">Number of created events: </span><span id="events-counter"></span>
 			</div>
 
 			<div id="timeline" class="js-hide-popovers"></div>
