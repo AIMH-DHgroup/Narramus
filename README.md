@@ -1,6 +1,5 @@
-# The Story Map Building and Visualization Tool (SMBVT)
-
-**The Librarian** - Refining graphs, shaping trustworthy stories.
+# The Librarian
+## Refining graphs, shaping trustworthy stories.
 
 ![Narratia Logo](img/Narratia_logo.png)
 
