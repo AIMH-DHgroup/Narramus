@@ -10,4 +10,6 @@ images/*.gif
 !images/michelle.jpg
 !images/nasa.jpg
 !images/squid.jpg
-...
+
+
+TempJson/
