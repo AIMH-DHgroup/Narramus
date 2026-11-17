@@ -5,7 +5,7 @@
 
 ## Overview
 
-The Story Map Building and Visualization Tool (SMBVT) is a semi-automatic tool for constructing and visualizing narratives as semantic networks of events related through semantic relations. It presents narratives in the form of interactive story maps, timelines, and 3D visualizations.
+The Librarian is a semi-automatic tool, based on Story Map Building and Visualization Tool (SMBVT), for constructing and visualizing narratives as semantic networks of events related through semantic relations. It presents narratives in the form of interactive story maps, timelines, and 3D visualizations.
 
 SMBVT is an extension of the previously developed [Narrative Building and Visualisation Tool (NBVT)](http://dlnarratives.eu/tool/index.html) and obeys a dedicated [ontology for narratives](https://dlnarratives.eu/ontology.html).
 
@@ -38,12 +38,13 @@ SMBVT is an extension of the previously developed [Narrative Building and Visual
 
 ### Developers
 - Emanuele Lenzi
-- Claudio De Martino
+- Nicolò Pratelli
+- Claudio De Martino (previous SMBVT version)
 - Daniele Metilli (previous NBVT version)
 
 ## Citation
 
-If you use SMBVT in your research, please cite:
+If you use The Librarian in your research, please cite:
 
 > Bartalesi, V., Lenzi, E., De Martino, C., Coro, G. *[Interactive story maps for historical musical instruments: a 3D and semantic web tool for cultural heritage preservation](https://doi.org/10.1007/s41060-025-01014-4)*. Int J Data Sci Anal 22, 21. (2025)
 
@@ -278,7 +279,7 @@ The tool works best with recent versions of:
 This project is developed by the AIMH-DHgroup. Contributions are welcome through GitHub:
 
 ```
-https://github.com/AIMH-DHgroup/smbvt
+https://github.com/AIMH-DHgroup/narreview
 ```
 
 ## License
