@@ -1021,6 +1021,8 @@ body.narrreview-narratia-editor .popover.data-entity-details {
     box-sizing: border-box;
     display: flex;
     flex-direction: column;
+    height: fit-content;
+    min-height: 0;
     width: var(--nr-entity-popover-width, min(400px, max(320px, 32vw))) !important;
     max-width: calc(100vw - 24px);
     max-height: var(--nr-entity-popover-max-height, calc(100vh - 24px));
@@ -1109,13 +1111,30 @@ body.narrreview-narratia-editor .popover.data-entity-details > .popover-title .e
 }
 
 body.narrreview-narratia-editor .popover.data-entity-details > .popover-content {
-    flex: 1 1 auto;
+    flex: 0 1 auto;
+    height: auto;
     min-height: 0;
+    max-height: none;
     padding: 4px 16px 12px;
     overflow-x: hidden;
     overflow-y: auto;
     overscroll-behavior: contain;
     background: var(--nr-surface-raised);
+    scrollbar-width: thin;
+    scrollbar-color: var(--nr-line-strong) transparent;
+}
+
+body.narrreview-narratia-editor .popover.data-entity-details > .popover-content::-webkit-scrollbar {
+    width: 8px;
+}
+
+body.narrreview-narratia-editor .popover.data-entity-details > .popover-content::-webkit-scrollbar-thumb {
+    border-radius: 4px;
+    background: var(--nr-line-strong);
+}
+
+body.narrreview-narratia-editor .popover.data-entity-details > .popover-content::-webkit-scrollbar-track {
+    background: transparent;
 }
 
 body.narrreview-narratia-editor .popover.data-entity-details .entity-details-section {
