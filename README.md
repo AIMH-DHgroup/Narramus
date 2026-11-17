@@ -1,5 +1,5 @@
 # The Librarian
-## Refining graphs, shaping trustworthy stories.
+*Refining graphs, shaping trustworthy stories.*
 
 ![Narratia Logo](img/Narratia_logo.png)
 
