@@ -520,9 +520,14 @@ Questo endpoint:
 1. legge eventi/entita'/A1 dal DB
 2. costruisce un JSON per il triplificatore Java
 3. salva il JSON in `json/`
-4. lancia `Triplify/triplify.jar`
+4. lancia `Triplify/Triplify.jar`
 5. genera l'OWL in `owl/`
-6. salva la visualizzazione storica in `storymaps/[USER]/N[ID]/`
+6. salva il JSON della storymap e una pagina di ingresso in `storymaps/[USER]/N[ID]/`
+7. restituisce al builder il link diretto a `verticalstorymap3D/index.php?user=[USER]&id=N[ID]`, costruito rispetto al percorso di installazione effettivo
+
+Il builder invia il payload completo (`slides`, `items`, `events` e `A1`). Il messaggio mostra l'URL completo, cliccabile e apribile in una nuova finestra; il visualizzatore verticale carica `storymaps/[USER]/N[ID]/slide.json`. `storymaps/[USER]/N[ID]/index.html` mantiene la pagina con menu per storymap, timeline e ricerca.
+
+La generazione dell'OWL e la pubblicazione della storymap sono indipendenti: se il triplificatore Java fallisce, l'endpoint salva comunque il JSON e l'HTML della storymap e il builder mostra un avviso con il link alla storymap, senza indicare il grafo OWL come creato.
 
 ## Visualizzazioni
 

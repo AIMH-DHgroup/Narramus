@@ -23,7 +23,7 @@
 - `PHP/uploadImage.php`: entity image upload
 - `PHP/uploadEventImage.php`: event/cover image upload
 - `PHP/saveTempJsonPreviewStorymap.php`: temp JSON for preview
-- `PHP/publishAndTriplifyNarration.php`: publish old visualizations + OWL/triplify pipeline
+- `PHP/publishAndTriplifyNarration.php`: publish OWL/triplify output and storymap JSON/page
 - `PHP/downloadOwl.php`: check OWL presence
 - `PHP/deleteNarration.php`: delete full narrative
 - `PHP/sessionClose.php`: logout

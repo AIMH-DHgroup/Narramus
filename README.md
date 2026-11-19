@@ -106,6 +106,7 @@ If you use The Librarian in your research, please cite:
 3. **Web Server Configuration**
    - Upload all files to your web server's document root or XAMPP's `htdocs` folder
    - Ensure PHP is properly configured
+   - Ensure the PHP web-server user can write to `json/`, `owl/`, `storymaps/`, and `TempJson/`; these output directories must exist or their parent directories must allow PHP to create them. Do not make the entire document root writable.
 
 4. **User Management**
    - Users can request credentials via email (contact: emanuele.lenzi@isti.cnr.it)
