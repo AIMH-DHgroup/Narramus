@@ -193,8 +193,15 @@ function owl_storage_dir($subdir = '') {
 
 function images_storage_dir() {
 	$path = app_root_path() . DIRECTORY_SEPARATOR . 'images';
-	if (!file_exists($path)) {
-		mkdir($path, 0777, true);
+	if (!is_dir($path) && !@mkdir($path, 0770, true) && !is_dir($path)) {
+		json_error_response('Unable to create the image directory. Check its parent directory permissions.', 500, array(
+			'path' => $path,
+		));
+	}
+	if (!is_writable($path)) {
+		json_error_response('The image directory is not writable by the web server.', 500, array(
+			'path' => $path,
+		));
 	}
 	return $path;
 }
