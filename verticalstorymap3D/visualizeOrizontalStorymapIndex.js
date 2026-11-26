@@ -870,9 +870,9 @@ $.ajax({
 				
 				//////// per violini sfondo nero
 				var slideContentClass = 'backgroundSlideContent';
-				if(result.events[i].text.headline == "La viola da gamba a Montecastelli Pisano" || result.events[i].text.headline == "La viola a Montecastelli Pisano"){
-					slideContentClass += ' backgroundSlideContent--overlay';
-				}
+				//if(result.events[i].text.headline == "La viola da gamba a Montecastelli Pisano" || result.events[i].text.headline == "La viola a Montecastelli Pisano"){
+				//	slideContentClass += ' backgroundSlideContent--overlay';
+				//}
 			
 				// set default slide background
  				if(result.events[i].backgroundImg == "" || result.events[i].backgroundImg == undefined){
@@ -889,7 +889,8 @@ $.ajax({
 					'<div class="fullscreen2 text-center backgroundSlideLayout '+slidePositionClass+'">'+
 					'<div class="contentSlideFullscreen '+slideContentClass+'">' +
 					'<h1 class="display-4 d-flex justify-content-center backgroundSlideTitle" id="titleSlide">'+ result.events[i].text.headline +'</h1>' +
-					'<p class="d-flex justify-content-center backgroundSlideText">'+ result.events[i].text.text +'</p>'+
+					//'<p class="d-flex justify-content-center backgroundSlideText">'+ result.events[i].text.text +'</p>'+ 
+					'<p class="backgroundSlideText" style="text-align:left">'+ result.events[i].text.text +'</p>'+
 					divImageStory +
 					'</div>'+
 					'</div>'+

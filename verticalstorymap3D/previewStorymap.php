@@ -70,7 +70,8 @@
 		</div>
         <div class="col-sm-6 col-md-4 storymap-story">
 			
-			
+		
+        <!--
             <section data-scene="scene1" id="scene1" data-background="" class="sectionSlide" data-number-scene="1">
 			
                 <div class="fullscreen text-center">
@@ -81,7 +82,100 @@
 					<small class="d-flex justify-content-center"></small>
                 </div>
             </section>
-			
+        -->
+            
+<section data-scene="scene1" id="scene1"
+         data-background=""
+         class="sectionSlide"
+         data-number-scene="1">
+
+    <div class="fullscreen text-center">
+
+        <!-- Strisce superiori -->
+        <div style="
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 20vh;
+            z-index: 10;
+        ">
+
+            <!-- Prima striscia viola -->
+            <div style="
+                height: 20%;
+                background-color: #5c3197;
+            "></div>
+
+            <!-- Seconda striscia bianca -->
+            <div style="
+                position: relative;
+                height: 60%;
+                background-color: #ffffff;
+                box-sizing: border-box;
+            ">
+
+                <!-- Logo a sinistra -->
+                <img id="logo"
+                     src="../img/placemus_horizontal_colored-600x96.png"
+                     style="
+                        position: absolute;
+                        left: 3%;
+                        top: 50%;
+                        transform: translateY(-50%);
+                        width: auto;
+                        height: auto;
+                        max-width: 40%;
+                        max-height: 80%;
+                        object-fit: contain;
+                     ">
+
+                <!-- Logo a destra -->
+                <img id="logoDestro"
+                     src="../img/EN_FundedbytheEU.png"
+                     style="
+                        position: absolute;
+                        right: 3%;
+                        top: 50%;
+                        transform: translateY(-50%);
+                        width: auto;
+                        height: auto;
+                        max-width: 40%;
+                        max-height: 80%;
+                        object-fit: contain;
+                     ">
+
+            </div>
+
+        </div> <!-- CHIUSURA CONTENITORE STRISCE -->
+
+        <!-- Titolo -->
+        <h1 class="display-4 d-flex justify-content-center"
+            id="titleSlide"
+            style="
+                position: relative;
+                margin: 0 !important;
+                padding: 0 2%;
+                box-sizing: border-box;
+                width: 100%;
+                height: 80vh;
+                top: 20vh;
+                display: flex !important;
+                align-items: center;
+                justify-content: center;
+                white-space: normal !important;
+                overflow-wrap: break-word;
+            "></h1>
+
+        <!-- Sottotitolo -->
+        <small class="d-flex justify-content-center"
+               id="subTitleSlide">
+        </small>
+
+        <small class="d-flex justify-content-center"></small>
+
+    </div>
+</section>
 			
              
 			
